@@ -436,6 +436,15 @@ if want_oss_fuzz
         install_dir: bindir)
 
     test_programs += executable(
+        'fuzz-lxc-config-roundtrip',
+        files('fuzz-lxc-config-roundtrip.c') + include_sources + netns_ifaddrs_sources,
+        include_directories: liblxc_includes,
+        dependencies: [fuzzing_engine, oss_fuzz_dependencies],
+        link_with: [liblxc_static],
+        install: false,
+        install_dir: bindir)
+
+    test_programs += executable(
         'fuzz-lxc-define-load',
         files('fuzz-lxc-define-load.c') + include_sources + netns_ifaddrs_sources,
         include_directories: liblxc_includes,
